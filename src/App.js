@@ -1,21 +1,19 @@
+import { useState, useEffect } from 'react'
 import './App.css';
 
-
-const Person = () => {
-  return(
-    <div>
-      <h1>hey</h1>
-    </div>
-  )
-}
-
 function App() {
-  const name= 'John'
-  const isNameShowing = false;
+  const [counter, setCounter] = useState(0);
+
+  useEffect(()=>{
+    alert('you have changed the counter to '+ counter)
+  }, [])
+
+
   return (
     <div className="App">
-      <h1>hello from {isNameShowing?name: 'something'}</h1>
-      <Person />
+      <button onClick={()=>setCounter((prevCounter)=>prevCounter-1)}>-</button>
+      <h1>{counter}</h1>
+      <button onClick={()=>setCounter((prevCounter)=>prevCounter+1)}>+</button>
     </div>
   );
 }
