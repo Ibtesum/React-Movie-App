@@ -18,6 +18,13 @@ const App = ()=> {
     const response = await fetch(`${API_URL}&s=${title}`)
     const data = await response.json();
 
+    /* fetch(`${API_URL}&s=${title}`)
+      .then(response => response.json())
+      .then(data => {
+        console.log("data", data)
+      }) */
+
+
     setMovies(data.Search)
   }
 
@@ -36,6 +43,9 @@ const App = ()=> {
           placeholder="Search for movies"
           value={searchTerm}
           onChange={(e)=>setSearchTerm(e.target.value)}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") searchMovies(searchTerm)
+          }}
         />
         <img
           src={SearchIcon}
@@ -49,7 +59,7 @@ const App = ()=> {
           ? (
             <div className="container">
               {movies.map((movie)=>(
-                <MovieCard movie={movie} />
+                <MovieCard key={movie.imdbID} movie={movie} />
               ))}
             </div>
           ) : (
